@@ -29,9 +29,6 @@ from models.FCN import FCNs
 from models.atten_unet import AttU_Net
 from models.segnet import SegNet
 
-from torch.cuda.amp import autocast as autocast
-from torch.cuda.amp import GradScaler as GradScaler
-
 
 def get_split(train_test_split_file):
     train_test_id = pd.read_csv(train_test_split_file, index_col=0)
