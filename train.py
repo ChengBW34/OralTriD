@@ -39,16 +39,16 @@ def get_split(train_test_split_file):
 if __name__ == "__main__":
     dir_path = 'OralTrid'
     total_num = '808'
-    dir_name = f'data_train_val_split'
+    dir_name = f'./data_train_val_split'
     scaler = torch.amp.GradScaler()
     parser = argparse.ArgumentParser()
     arg = parser.add_argument
     arg('--model-name', type=str, default='unet', help='models', choices=['unet', 'deeplabv3', 'FCNs', 'atten_unet', 'segnet'])
-    arg('--data-path', type=str, default=f'./data_train_val_split/glossopathy_h5', help='data path')
+    arg('--data-path', type=str, default=f'{dir_name}/glossopathy_h5', help='data path')
     arg('--jaccard-weight', type=float, default=1)
     arg('--checkpoint', type=str, default=f'./checkpoint', help='checkpoint path')
     arg('--save-dir', type=str, default=f'./logs', help='save dir path')
-    arg('--train-test-split-file', type=str, default=f'./{dir_name}/train_val_split.csv', help='train test split file path')
+    arg('--train-test-split-file', type=str, default=f'{dir_name}/train_val_split.csv', help='train test split file path')
     arg('--batch-size-train', type=int, default=5)
     arg('--num-classes', type=int, default=3)
     arg('--batch-size-val', type=int, default=5)
