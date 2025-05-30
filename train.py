@@ -74,7 +74,7 @@ if __name__ == "__main__":
     save_dir = args.save_dir
     Epoch = args.Epoch
     time_str = datetime.datetime.strftime(datetime.datetime.now(), '%Y_%m_%d_%H_%M_%S')
-    log_dir = os.path.join(save_dir, f"{model_name}_loss_" + str(time_str))
+    log_dir = os.path.join(save_dir, f"{model_name}_loss" + str(time_str))
 
     input_shape = [640, 448]
     Init_lr = 2e-3
@@ -95,11 +95,9 @@ if __name__ == "__main__":
     train_test_id = get_split(args.train_test_split_file)
 
     train_loader = make_loader(train_test_id, data_path, args, train=True, shuffle=True,
-                               train_test_split_file=args.train_test_split_file,
-                               transform=None)
+                               train_test_split_file=args.train_test_split_file)
     valid_loader = make_loader(train_test_id, data_path, args, train=False, shuffle=True,
-                               train_test_split_file=args.train_test_split_file,
-                               transform=None)
+                               train_test_split_file=args.train_test_split_file)
     print('train_loader: ', len(train_loader))
     print('valid_loader: ', len(valid_loader))
 

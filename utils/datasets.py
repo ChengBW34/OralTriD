@@ -40,7 +40,7 @@ def img_to_array(image, data_format='channels_last', dtype='float32'):
     return x
 
 
-class SkinDataset(Dataset):
+class OralDataset(Dataset):
     def __init__(self, train_test_id, image_path, train_test_split_file,
                  train=True, attribute=None, transform=None, num_classes=None):
 
@@ -136,7 +136,7 @@ class SkinDataset(Dataset):
             img_np = (img_np / 255.0).astype('float32')
             mask_np = (mask_np / 255.0).astype('uint8')
         ind = self.mask_ind[self.mask_ind['ID'] == img_id][self.attr_types].values.astype('uint8')
-        return img_np, mask_np, ind[0]
+        return torch.from_numpy(img_np), torch.from_numpy(mask_np), torch.from_numpy(ind[0])
 
 
 def load_image(image_file):
@@ -151,12 +151,12 @@ def load_mask(image_path, img_id):
     mask_np = mask_np.astype('uint8')
     return mask_np
 
-def make_loader(train_test_id, image_path, args, train, shuffle, transform, train_test_split_file):
-    data_set = SkinDataset(train_test_id=train_test_id,
+def make_loader(train_test_id, image_path, args, train, shuffle, train_test_split_file):
+    data_set = OralDataset(train_test_id=train_test_id,
                            image_path=image_path,
                            train=train,
                            attribute=args.attribute,
-                           transform=transform,
+                           transform=None,
                            num_classes=args.num_classes,
                            train_test_split_file=train_test_split_file)
 
