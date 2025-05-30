@@ -1,12 +1,9 @@
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
-from collections import OrderedDict
-
 
 def conv3x3(in_, out):
     return nn.Conv2d(in_, out, 3, padding=1)
-
 
 class ConvRelu(nn.Module):
     def __init__(self, in_: int, out: int):
@@ -178,6 +175,5 @@ class SegNet(nn.Module):
         return x11d, x_out_empty_ind1
 
     def load_from_segnet(self, model_path):
-        s_dict = self.state_dict()  # create a copy of the state dict
         th = torch.load(model_path).state_dict()  # load the weigths
         self.load_state_dict(th)

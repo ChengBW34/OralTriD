@@ -2,7 +2,6 @@ import os
 
 import matplotlib
 import torch
-import torch.nn.functional as F
 
 matplotlib.use('Agg')
 from matplotlib import pyplot as plt

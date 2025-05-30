@@ -10,7 +10,6 @@ import torchvision.transforms.functional as TF
 import random
 
 def array_to_img(x, data_format='channels_last'):
-    # 数据类型检查
     if not isinstance(x, np.ndarray):
         raise ValueError("输入必须是 NumPy 数组")
 
@@ -43,7 +42,6 @@ def img_to_array(image, data_format='channels_last', dtype='float32'):
 class OralDataset(Dataset):
     def __init__(self, train_test_id, image_path, train_test_split_file,
                  train=True, attribute=None, transform=None, num_classes=None):
-
         self.resize = [640, 448]
         self.std = [0, 0, 0]
         self.padding_value = 0
@@ -151,24 +149,24 @@ def load_mask(image_path, img_id):
     mask_np = mask_np.astype('uint8')
     return mask_np
 
-def make_loader(train_test_id, image_path, args, train, shuffle, train_test_split_file):
+def make_loader(train_test_id, image_path, config, train, shuffle, train_test_split_file):
     data_set = OralDataset(train_test_id=train_test_id,
                            image_path=image_path,
                            train=train,
-                           attribute=args.attribute,
+                           attribute=config['training']['attribute'],
                            transform=None,
-                           num_classes=args.num_classes,
+                           num_classes=config['model']['num_classes'],
                            train_test_split_file=train_test_split_file)
 
     if train:
         data_loader = DataLoader(data_set,
-                                 batch_size=args.batch_size_train,
+                                 batch_size=config['training']["batch_size_train"],
                                  shuffle=shuffle,
                                  num_workers=48,
                                  pin_memory=torch.cuda.is_available())
     else:
         data_loader = DataLoader(data_set,
-                                 batch_size=args.batch_size_val,
+                                 batch_size=config['training']["batch_size_val"],
                                  shuffle=shuffle,
                                  num_workers=48,
                                  pin_memory=torch.cuda.is_available())

@@ -1,15 +1,10 @@
 from __future__ import print_function
-
 import torch
 import torch.nn as nn
-import torch.optim as optim
-from torchvision import models
 from torchvision.models.vgg import VGG
-
 
 def conv3x3(in_, out):
     return nn.Conv2d(in_, out, 3, padding=1)
-
 
 class ConvRelu(nn.Module):
     def __init__(self, in_: int, out: int):
@@ -21,7 +16,6 @@ class ConvRelu(nn.Module):
         x = self.conv(x)
         x = self.activation(x)
         return x
-
 
 class DecoderBlock(nn.Module):
     def __init__(self, in_channels, middle_channels, out_channels, is_deconv=True):
@@ -88,7 +82,6 @@ class FCN32s(nn.Module):
         x_out_empty_ind2 = torch.squeeze(x_out_empty_ind2)
 
         return score, x_out_empty_ind1, x_out_empty_ind2
-
 
 class FCN16s(nn.Module):
 

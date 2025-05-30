@@ -1,0 +1,22 @@
+model:
+  model_name: "unet"  # 可选: ['unet', 'deeplabv3', 'FCNs', 'atten_unet', 'segnet']
+  num_classes: 3
+  jaccard_weight: 1
+
+paths:
+  dir_path: "./data_train_val_split"
+  data_path: "{dir_path}/glossopathy_h5"
+  checkpoint: "./checkpoint"
+  save_dir: "./logs"
+  train_test_split_file: "{dir_path}/train_val_split.csv"
+
+training:
+  batch_size_train: 5
+  batch_size_val: 5
+  epoch: 1000
+  optimizer_type: "adam"  # 可选: ['adam', 'sgd', 'rmsprop']
+  attribute: "all"
+
+misc:
+  seed: 42
+  device: "cuda"  # 'cuda' or 'cpu'

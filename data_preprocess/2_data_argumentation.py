@@ -9,7 +9,7 @@ import pickle
 cla_tmp = 'OBC'
 cla = 'OBC'
 save_dir = 'data_argumentation'
-dir_path = 'data_train_val_808'
+dir_path = 'data_train_val_split'
 
 if cla == 'OLP':
     overlap_threshold = 0.5

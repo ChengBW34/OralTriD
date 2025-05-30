@@ -1,8 +1,6 @@
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
-import os
-
 
 class DoubleConv(nn.Module):
     '''(conv => BN => ReLU) * 2'''

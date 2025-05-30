@@ -3,7 +3,7 @@ import shutil
 from PIL import Image
 
 if __name__ == '__main__':
-    dir_name = 'data_train_val_808'
+    dir_name = 'data_train_val_split'
     dir_path = f'../{dir_name}/data_argumentation/masks'
     filedirs = os.listdir(dir_path)
     for filedir in filedirs:

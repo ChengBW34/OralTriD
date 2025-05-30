@@ -1,19 +1,10 @@
-import os
-import torch
-import torch.nn as nn
 import torch.nn.functional as F
-
-import sys
 import torch
-from collections import OrderedDict
 import torch.nn as nn
 
 BatchNorm2d = nn.BatchNorm2d
-
-
 def conv3x3(in_, out):
     return nn.Conv2d(in_, out, 3, padding=1)
-
 
 class ConvRelu(nn.Module):
     def __init__(self, in_: int, out: int):
@@ -26,10 +17,8 @@ class ConvRelu(nn.Module):
         x = self.activation(x)
         return x
 
-
 class Bottleneck(nn.Module):
     expansion = 4
-
     def __init__(self, inplanes, planes, stride=1, dilation=1, downsample=None, fist_dilation=1, multi_grid=1,
                  bn_momentum=0.0003):
         super(Bottleneck, self).__init__()

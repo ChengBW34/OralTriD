@@ -25,19 +25,14 @@ def train_test_split_add(train_val_split, train_or_val, ID, filedir):
     return train_val_split
 
 if __name__ == "__main__":
-    # 1--seed 0
-    # 2--seed 1
-    # 3--seed 2
-    # 4--seed 3
-    # 5--seed 4
-    random.seed(4)
+    random.seed(1)
     print("Generate txt in ImageSets.")
 
     train_percent = 0.8
     val_percent = 0.2
     Glos_path = '../datasets/JPEGimages'
-    argumentation_path = '../data_train_val_808/data_argumentation/imgs'
-    save_path = '../data_train_val_808'
+    argumentation_path = '../data_train_val_split/data_argumentation/imgs'
+    save_path = '../data_train_val_split'
     if not os.path.exists(save_path):
         os.makedirs(save_path)
 
@@ -95,4 +90,4 @@ if __name__ == "__main__":
     val_nums = len(df[df['Split'] == 'val'].ID.values)
     print('train_nums: ', train_nums, 'val_nums: ', val_nums)
     # 保存为 pickle 文件
-    df.to_pickle(f'{save_path}/arg_train_val_split_5.pkl')
+    df.to_pickle(f'{save_path}/train_val_split.pkl')

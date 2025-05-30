@@ -1,12 +1,9 @@
 import torch
 import torch.nn as nn
-import torch.nn.functional as F
 from torch.nn import init
-
 
 def conv3x3(in_, out):
     return nn.Conv2d(in_, out, 3, padding=1)
-
 
 class ConvRelu(nn.Module):
     def __init__(self, in_: int, out: int):
@@ -18,7 +15,6 @@ class ConvRelu(nn.Module):
         x = self.conv(x)
         x = self.activation(x)
         return x
-
 
 class DecoderBlock(nn.Module):
     def __init__(self, in_channels, middle_channels, out_channels, is_deconv=True):
@@ -38,10 +34,8 @@ class DecoderBlock(nn.Module):
                 ConvRelu(in_channels, middle_channels),
                 ConvRelu(middle_channels, out_channels),
             )
-
     def forward(self, x):
         return self.block(x)
-
 
 def init_weights(net, init_type='normal', gain=0.02):
     def init_func(m):
@@ -66,7 +60,6 @@ def init_weights(net, init_type='normal', gain=0.02):
     print('initialize network with %s' % init_type)
     net.apply(init_func)
 
-
 class conv_block(nn.Module):
     def __init__(self, ch_in, ch_out):
         super(conv_block, self).__init__()
@@ -83,7 +76,6 @@ class conv_block(nn.Module):
         x = self.conv(x)
         return x
 
-
 class up_conv(nn.Module):
     def __init__(self, ch_in, ch_out):
         super(up_conv, self).__init__()
@@ -97,7 +89,6 @@ class up_conv(nn.Module):
     def forward(self, x):
         x = self.up(x)
         return x
-
 
 class Recurrent_block(nn.Module):
     def __init__(self, ch_out, t=2):
@@ -119,7 +110,6 @@ class Recurrent_block(nn.Module):
             x1 = self.conv(x + x1)
         return x1
 
-
 class RRCNN_block(nn.Module):
     def __init__(self, ch_in, ch_out, t=2):
         super(RRCNN_block, self).__init__()
@@ -134,7 +124,6 @@ class RRCNN_block(nn.Module):
         x1 = self.RCNN(x)
         return x + x1
 
-
 class single_conv(nn.Module):
     def __init__(self, ch_in, ch_out):
         super(single_conv, self).__init__()
@@ -147,7 +136,6 @@ class single_conv(nn.Module):
     def forward(self, x):
         x = self.conv(x)
         return x
-
 
 class Attention_block(nn.Module):
     def __init__(self, F_g, F_l, F_int):
